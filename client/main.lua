@@ -47,11 +47,11 @@ local function DrawText3Ds(x, y, z, text)
     SetTextFont(4)
     SetTextProportional(1)
     SetTextColour(255, 255, 255, 215)
-    SetTextEntry("STRING")
+    BeginTextCommandDisplayText("STRING")
     SetTextCentre(true)
-    AddTextComponentString(text)
+    AddTextComponentSubstringPlayerName(text)
     SetDrawOrigin(x,y,z, 0)
-    DrawText(0.0, 0.0)
+    EndTextCommandDisplayText(0.0, 0.0)
     local factor = (string.len(text)) / 370
     DrawRect(0.0, 0.0+0.0125, 0.017+ factor, 0.03, 0, 0, 0, 75)
     ClearDrawOrigin()
@@ -124,8 +124,6 @@ local function UpdateLevel()
             Config.MyLevel = 1
         elseif MyRep >= 50 and MyRep < 100 then
             Config.MyLevel = 2
-        elseif MyRep >= 100 and MyRep < 200 then
-            Config.MyLevel = 3
         elseif MyRep >= 100 and MyRep < 200 then
             Config.MyLevel = 3
         elseif MyRep >= 200 then
@@ -270,6 +268,7 @@ local function TakeHotdogStand()
         AttachEntityToEntity(StandObject, PlayerPed, GetPedBoneIndex(PlayerPed, 28422), -0.45, -1.2, -0.82, 180.0, 180.0, 270.0, false, false, false, false, 1, true)
     end)
     FreezeEntityPosition(StandObject, false)
+    FreezeEntityPosition(PlayerPed, false)
     AnimLoop()
 end
 
